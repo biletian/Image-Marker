@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片标记工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>图片标记工具</h1>
+            <p class="subtitle">上传、注释和管理您的图片集合</p>
+        </header>
+        
+        <main>
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon-container">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p>拖放图片到这里或</p>
+                    <label for="fileInput" class="upload-btn">浏览文件</label>
+                    <input type="file" id="fileInput" accept="image/*" multiple hidden>
+                    <p class="upload-limit"><i class="fas fa-info-circle"></i> 最多50张图片</p>
+                </div>
+            </section>
+            
+            <section class="image-gallery" id="imageGallery">
+                <div class="gallery-header">
+                    <h2><i class="fas fa-images"></i> 已上传图片 <span class="count-badge" id="imageCount">0</span></h2>
+                    <div class="gallery-actions">
+                        <button id="downloadBtn" class="action-btn" disabled>
+                            <i class="fas fa-download"></i> 下载全部
+                        </button>
+                    </div>
+                </div>
+                <div class="gallery-container" id="galleryContainer">
+                    <!-- 图片将在这里动态添加 -->
+                    <div id="noImagesMessage" class="no-images-message">
+                        <i class="fas fa-photo-film empty-icon"></i>
+                        <p>尚未上传图片</p>
+                        <p class="empty-hint">上传图片后将显示在这里</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2023 图片标记工具 - 在浏览器中安全处理您的图片</p>
+        </footer>
+        
+        <!-- 图片注释模态框 -->
+        <div id="annotationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-edit"></i> 添加注释</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="image-preview">
+                        <img id="modalImage" src="" alt="图片预览">
+                    </div>
+                    <div class="annotation-form">
+                        <label for="annotationText">注释:</label>
+                        <textarea id="annotationText" rows="4" placeholder="在这里输入您的注释..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveAnnotationBtn" class="primary-btn"><i class="fas fa-save"></i> 保存</button>
+                    <button id="cancelAnnotationBtn" class="secondary-btn">取消</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 下载选项模态框 -->
+        <div id="downloadModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-cog"></i> 下载选项</h3>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="download-options">
+                        <div class="option">
+                            <input type="checkbox" id="renameFiles" checked>
+                            <label for="renameFiles">统一重命名文件</label>
+                        </div>
+                        <div class="rename-options" id="renameOptions">
+                            <label for="baseFileName">基本文件名:</label>
+                            <input type="text" id="baseFileName" value="图片">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmDownloadBtn" class="primary-btn"><i class="fas fa-download"></i> 下载</button>
+                    <button id="cancelDownloadBtn" class="secondary-btn">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
